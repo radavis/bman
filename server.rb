@@ -1,14 +1,21 @@
 require "sinatra"
+require "./lib/unix_command"
 
-def all_commands
-  @all_commands ||= `apropos .* | col -b`
-end
+require "pry"
 
 get "/" do
-  "<pre>#{all_commands}</pre>"
+  redirect to("/unix_commands")
 end
 
-get "/man/:command" do |command|
-  command_info = `man #{command} | col -b`
-  "<pre>#{command_info}</pre>"
+get "/unix_commands" do
+  params[:page] ||= 1
+  page = params[:page].to_i
+  per_page = 30
+  @unix_commands = UnixCommand.all[((page - 1) * per_page)...(page * per_page)]
+  erb :index
+end
+
+get "/unix_commands/:command" do |command|
+  unix_command = UnixCommand.find_by(name: command)
+  "<pre>#{unix_command.man_page}</pre>"
 end

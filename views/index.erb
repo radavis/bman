@@ -1,0 +1,10 @@
+<table>
+  <% @unix_commands.each do |unix_command| %>
+    <tr>
+      <td>
+        <a href="/unix_commands/<%= unix_command.name %>"><%= unix_command.name %></a>(<%= unix_command.type %>)
+      </td>
+      <td><%= unix_command.description %></td>
+    </tr>
+  <% end %>
+</table>
