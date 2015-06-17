@@ -2,9 +2,9 @@ class UnixCommand
   TYPE = [
     "User Commands",
     "System Calls",
-    "Library functions",
+    "Library Functions",
     "Devices",
-    "File formats",
+    "File Formats",
     "Games and Amusements",
     "Conventions and Miscellany",
     "System Administration"
@@ -19,13 +19,19 @@ class UnixCommand
         match_data = /(.*)\((.*)\)\s*-\s(.*)/.match(a)
         command, type, description = match_data[1, 3]
         unix_command = UnixCommand.new(command, type, description)
-        @@all_results << unix_command
+        if @@all_results.find { |cmd| cmd == unix_command }.nil?
+          @@all_results << unix_command
+        end
       end
       @@all_results.sort_by! { |cmd| cmd.name }
     end
 
     def find_by(options = {})
       all.find { |result| result.name == options[:name] }
+    end
+
+    def sample
+      all.sample
     end
 
     private
@@ -48,5 +54,9 @@ class UnixCommand
 
   def man_page
     `man #{@name} | col -b`
+  end
+
+  def ==(other_command)
+    self.name == other_command.name
   end
 end

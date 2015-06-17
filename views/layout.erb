@@ -6,6 +6,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <form id="search" method="get" action="/search">
+        <input type="text" name="q">
+        <input type="submit" value="search">
+      </form>
+    </div>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

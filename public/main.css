@@ -1,3 +1,24 @@
-body {
+body, pre {
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+}
+
+div.container {
+  margin: auto 5%;
+}
+
+div.footer {
+  text-align: center;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table td:last-child {
+  padding-left: 1em;
 }

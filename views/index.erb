@@ -2,9 +2,14 @@
   <% @unix_commands.each do |unix_command| %>
     <tr>
       <td>
-        <a href="/unix_commands/<%= unix_command.name %>"><%= unix_command.name %></a>(<%= unix_command.type %>)
+        <a href="/unix_commands/<%= unix_command.name %>"><%= unix_command.name.truncate(25) %></a>(<%= unix_command.type %>)
       </td>
-      <td><%= unix_command.description %></td>
+      <td><%= unix_command.description.truncate(75) %></td>
     </tr>
   <% end %>
 </table>
+
+<div class="footer">
+  <a href="<%= @prev_path %>">Prev</a> |
+  <a href="<%= @next_path %>">Next</a>
+</div>
