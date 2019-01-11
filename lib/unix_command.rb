@@ -1,3 +1,5 @@
+require "active_support/core_ext/object"
+
 class UnixCommand
   TYPE = [
     "User Commands",
@@ -17,6 +19,10 @@ class UnixCommand
 
       apropos.each do |a|
         match_data = /(.*)\((.*)\)\s*-\s(.*)/.match(a)
+        if match_data.blank?
+          puts("couldn't  match #{a}")
+          next
+        end
         command, type, description = match_data[1, 3]
         unix_command = UnixCommand.new(command, type, description)
         if @@all_results.find { |cmd| cmd == unix_command }.nil?
